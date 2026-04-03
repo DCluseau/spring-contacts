@@ -15,6 +15,9 @@ A contact is defined by :
 A category is defined by its name.
 
 ## Use cases
+### UML diagram
+<img width="700" height="460" alt="image" src="https://github.com/user-attachments/assets/e93888cf-a700-47cc-8ea3-e68e49d570ba" />
+
 ### Display index page (unauthenticated user)
 | Element  | Description |
 | ------------- | ------------- |
@@ -75,3 +78,14 @@ A category is defined by its name.
 |   | The API deletes the contact, displays a success message and displays the contacts list  |
 | Secondary scenario  | An error occurred in the API : an error message is displayed.  |
 | Post-condition  | The contact has been deleted and the API displays the contacts list  |
+### Search a contact
+| Element  | Description |
+| ------------- | ------------- |
+| Actors  | Authenticated user  |
+| Pre-condition  | User must be authenticated  |
+| Main scenario  | The user enters a keyword in the search form  |
+|   | The API displays a list of contacts matching the keyword  |
+| Secondary scenario  | An error occurred in the API : an error message is displayed.  |
+|   | No contact found : the API displays this message.  |
+| Post-condition  | A list of matching contacts is displayed by the API  |
+
