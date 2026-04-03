@@ -89,3 +89,6 @@ A category is defined by its name.
 |   | No contact found : the API displays this message.  |
 | Post-condition  | A list of matching contacts is displayed by the API  |
 
+## Class diagram
+<img width="810" height="190" alt="image" src="https://github.com/user-attachments/assets/c891e3b0-07fa-4d7b-a311-368a94df6a71" />
+
