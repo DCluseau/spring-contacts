@@ -41,9 +41,9 @@ public class ContactController {
 	}
 	
 	@GetMapping("delete")
-	public String delete(Model model, Long contactId) {
-		contactRepository.deleteById(contactId);
-		return "contacts";
+	public String delete(Model model, Long id) {
+		contactRepository.deleteById(id);
+		return "redirect:/index";
 	}
 	
 	@GetMapping("/edit")
