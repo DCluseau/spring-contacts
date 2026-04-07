@@ -14,6 +14,7 @@ import fr.fms.dao.CategoryRepository;
 import fr.fms.dao.ContactRepository;
 import fr.fms.dao.UserRepository;
 import fr.fms.entities.User;
+import fr.fms.entities.Article;
 import fr.fms.entities.Category;
 import fr.fms.entities.Contact;
 
@@ -38,6 +39,25 @@ public class ContactController {
 		model.addAttribute("listCategory", categories);
 		
 		return "contacts";
+	}
+	
+	@GetMapping("add")
+	public String add(Model model) {
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("contact", new Contact());
+		model.addAttribute("listCategory", categories);
+		return "add";
+	}
+	
+	@PostMapping("save")
+	public String save(Model model, Contact contact, Long categoryId, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "contacts";
+		}
+		Category category = categoryRepository.findById(categoryId).get();
+		contact.setCategory(category);
+		contactRepository.save(contact);
+		return "redirect:/index";
 	}
 	
 	@GetMapping("delete")
