@@ -40,6 +40,13 @@ public class ContactController {
 		return "contacts";
 	}
 	
+	@GetMapping("add")
+	public String add(Model model) {
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("listCategory", categories);
+		return "contacts";
+	}
+	
 	@GetMapping("delete")
 	public String delete(Model model, Long id) {
 		contactRepository.deleteById(id);
