@@ -94,3 +94,7 @@ A category is defined by its name.
 
 ## Mock-up
 <img width="1015" height="698" alt="image" src="https://github.com/user-attachments/assets/226a82ea-2fa5-45cd-87a4-be1da3346420" />
+
+## Software Architecture
+![softwareArchitecture](https://github.com/user-attachments/assets/d26ba213-2ae6-4363-a9b6-d677047e1b7d)
+
