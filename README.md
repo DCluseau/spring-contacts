@@ -92,3 +92,5 @@ A category is defined by its name.
 ## Class diagram
 <img width="810" height="190" alt="image" src="https://github.com/user-attachments/assets/c891e3b0-07fa-4d7b-a311-368a94df6a71" />
 
+## Mock-up
+<img width="1015" height="698" alt="image" src="https://github.com/user-attachments/assets/226a82ea-2fa5-45cd-87a4-be1da3346420" />
