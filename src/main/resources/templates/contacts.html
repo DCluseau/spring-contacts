@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate = "layout">
+<head>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Contacts list</div>
+			
+			<div class="panel-body">
+				<table class="table">
+					<tr>
+						<th>Id</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Phone number</th>
+						<th>Address</th>
+						<th>Category</th>
+						<th></th>
+						<th></th>
+					</tr>	
+					<tr th:each="c:${listContacts}">
+						<td th:text="${c.id}"></td>
+						<td th:text="${c.firstname}"></td>
+						<td th:text="${c.lastname}"></td>
+						<td th:text="${c.email}"></td>
+						<td th:text="${c.phoneNumber}"></td>
+						<td th:text="${c.address}"></td>
+						<td th:text="${c.category}"></td>
+						<td>
+							<a th:href="@{/edit(id=${c.id})}" class="btn btn-primary">Edit</a>
+						</td>
+						<td>
+							<a th:href="@{/delete(id=${c.id})}" class="btn btn-danger">Delete</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
