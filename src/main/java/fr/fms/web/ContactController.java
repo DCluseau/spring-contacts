@@ -14,7 +14,6 @@ import fr.fms.dao.CategoryRepository;
 import fr.fms.dao.ContactRepository;
 import fr.fms.dao.UserRepository;
 import fr.fms.entities.User;
-import fr.fms.entities.Article;
 import fr.fms.entities.Category;
 import fr.fms.entities.Contact;
 
