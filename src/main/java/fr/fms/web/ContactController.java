@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.fms.dao.CategoryRepository;
@@ -36,6 +38,33 @@ public class ContactController {
 		model.addAttribute("listCategory", categories);
 		
 		return "contacts";
+	}
+	
+	@GetMapping("delete")
+	public String delete(Model model, Long id) {
+		contactRepository.deleteById(id);
+		return "redirect:/index";
+	}
+	
+	@GetMapping("/edit")
+	public String edit(Model model, Long id) {
+		List<Category> categories = categoryRepository.findAll();
+		Contact contact = contactRepository.findById(id).get();
+		model.addAttribute("contact", contact);
+		model.addAttribute("listCategories", categories);
+		
+		return "edit";
+	}
+	
+	@PostMapping("update")
+	public String update(Model model, Contact contact, Long categoryId, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "contacts";
+		}
+		Category category = categoryRepository.findById(categoryId).get();
+		contact.setCategory(category);
+		contactRepository.save(contact);
+		return "redirect:/index";
 	}
 
 }
