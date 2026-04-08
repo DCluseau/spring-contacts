@@ -1,52 +1,53 @@
 package fr.fms.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
-public class Contact implements Serializable {
+@Data @NoArgsConstructor @AllArgsConstructor @ToString @Builder
+public class MyUser implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
-	@Size(max=50)
-	private String firstname;
 	@NotNull
 	@Size(min=3,max=50)
-	private String lastname;
+	private String username;
 	@NotNull
 	@Size(min=5,max=50)
+	private String password;
 	private String email;
-	private String phoneNumber;
-	private String address;
-	@ManyToOne
-	private Category category;
-	@ManyToOne
-	private MyUser user;
+	@ColumnDefault("false")
+	private boolean isConnected;
+	private String roles;
 	
-	public Contact(String lastname, String email, MyUser user, Category category) {
-		this.lastname = lastname;
-		this.email =  email;
-		this.user = user;
-		this.category = category;
+	@OneToMany(mappedBy = "user")
+	private List<Contact> contacts;
+	
+	public MyUser(String username, String password, String email, String roles) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.roles = roles;
 	}
-
 }

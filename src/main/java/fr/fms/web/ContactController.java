@@ -3,6 +3,8 @@ package fr.fms.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,31 +14,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.fms.dao.CategoryRepository;
 import fr.fms.dao.ContactRepository;
-import fr.fms.dao.UserRepository;
-import fr.fms.entities.User;
+import fr.fms.dao.MyUserRepository;
 import fr.fms.entities.Category;
 import fr.fms.entities.Contact;
 
 @Controller
 public class ContactController {
 	@Autowired
-	UserRepository userRepository;
+	MyUserRepository userRepository;
 	
 	@Autowired
 	ContactRepository contactRepository;
 	
 	@Autowired
 	CategoryRepository categoryRepository;
-	
+		
 	public ContactController() {}
-	
+		
 	@GetMapping("/index")
-	public String index(Model model) {
+	public String index(Model model, @RequestParam(defaultValue="")String username) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
 		List<Category> categories = categoryRepository.findAll();
 		List<Contact> contacts = contactRepository.findAll();
 		model.addAttribute("listContacts", contacts);
 		model.addAttribute("listCategory", categories);
-		
+		if(currentPrincipalName == "anonymousUser") {
+			currentPrincipalName = "stranger";
+		}
+		model.addAttribute("username", currentPrincipalName);
 		return "contacts";
 	}
 	
@@ -85,5 +91,15 @@ public class ContactController {
 		contactRepository.save(contact);
 		return "redirect:/index";
 	}
+	
+    @GetMapping("/signin")
+    public String signin() {
+        return "signin";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
 }
