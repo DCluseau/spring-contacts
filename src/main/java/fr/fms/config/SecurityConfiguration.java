@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                         .defaultSuccessUrl("/index", true)  // Redirect to home after successful login
                         .permitAll())
                 .logout(logout -> logout.logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")  // Redirect to login page after logout
+                        .logoutSuccessUrl("/index?logout")  // Redirect to login page after logout
                         .permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF for simplicity (not recommended for production)
