@@ -10,23 +10,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.fms.config.SecurityConfiguration;
 import fr.fms.dao.CategoryRepository;
 import fr.fms.dao.ContactRepository;
-import fr.fms.dao.UserRepository;
-import fr.fms.entities.User;
+import fr.fms.dao.MyUserRepository;
+import fr.fms.entities.MyUser;
 import fr.fms.entities.Category;
 import fr.fms.entities.Contact;
 
 @Controller
 public class ContactController {
 	@Autowired
-	UserRepository userRepository;
+	MyUserRepository userRepository;
 	
 	@Autowired
 	ContactRepository contactRepository;
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	SecurityConfiguration securityConfig;
 	
 	public ContactController() {}
 	
@@ -85,5 +89,15 @@ public class ContactController {
 		contactRepository.save(contact);
 		return "redirect:/index";
 	}
+	
+    @GetMapping("/signin")
+    public String signin() {
+        return "signin";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
 }

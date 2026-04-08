@@ -7,16 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import fr.fms.dao.CategoryRepository;
 import fr.fms.dao.ContactRepository;
-import fr.fms.dao.UserRepository;
+import fr.fms.dao.MyUserRepository;
 import fr.fms.entities.Category;
 import fr.fms.entities.Contact;
-import fr.fms.entities.User;
+import fr.fms.entities.MyUser;
 
 @SpringBootApplication
 public class SpringContactApp implements CommandLineRunner {
 
 	@Autowired
-	private UserRepository userRepository;
+	private MyUserRepository userRepository;
 	@Autowired
 	private ContactRepository contactRepository;
 	
