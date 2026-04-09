@@ -94,6 +94,7 @@ public class ContactController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		model.addAttribute("username", currentPrincipalName);
+		model.addAttribute("userId", contact.getUser().getId());
 		
 		return "edit";
 	}
@@ -103,8 +104,11 @@ public class ContactController {
 		if(bindingResult.hasErrors()) {
 			return "contacts";
 		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
 		Category category = categoryRepository.findById(categoryId).get();
 		contact.setCategory(category);
+		contact.setUser(userRepository.findByUsername(currentPrincipalName).get());
 		contactRepository.save(contact);
 		return "redirect:/index";
 	}
