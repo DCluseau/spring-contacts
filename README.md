@@ -60,7 +60,7 @@ A category is defined by its name.
 | ------------- | ------------- |
 | Actors  | Authenticated user  |
 | Pre-condition  | User must be authenticated  |
-| Main scenario  | The user clics on he Edit contact option in the same line as the contact to be edited  |
+| Main scenario  | The user clics on the Edit contact option in the same line as the contact to be edited  |
 |   | The API displays a form with the contact's informations for the user to edit  |
 |   | The user modify the form and clicks on Submit  |
 |   | The API returns to the contacts list and displays a success message  |
