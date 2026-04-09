@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.fms.dao.CategoryRepository;
 import fr.fms.dao.ContactRepository;
@@ -32,20 +33,27 @@ public class ContactController {
 	public ContactController() {}
 		
 	@GetMapping("/index")
-	public String index(Model model) {
+	public String index(Model model, @RequestParam(name="keyword", defaultValue = "")String kw) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-		
+		List<Contact> contacts;
 		if(currentPrincipalName == "anonymousUser") {
 			currentPrincipalName = "stranger";
 		}else {
 			MyUser user = userRepository.findByUsername(currentPrincipalName).get();
 			List<Category> categories = categoryRepository.findAll();
-			List<Contact> contacts = contactRepository.findByUser(user);
+			if(kw != "") {
+//				contacts = contactRepository.findByUserAndLastnameContainsOrFirstnameContainsOrEmailContainsOrPhoneNumberContainsOrAddressContains(user, kw, kw, kw, kw, kw);
+//				contacts = contactRepository.findByWithUserAndLastnameContainsOrFirstnameContains(kw, kw, user);
+				contacts = contactRepository.findByUserAndLastnameContains(user, kw);
+			}else {
+				contacts = contactRepository.findByUser(user);
+			}
 			model.addAttribute("listContacts", contacts);
 			model.addAttribute("listCategory", categories);
 		}
 		model.addAttribute("username", currentPrincipalName);
+		model.addAttribute("keyword", kw);
 		return "contacts";
 	}
 	
