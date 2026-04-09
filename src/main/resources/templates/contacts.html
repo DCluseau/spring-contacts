@@ -7,6 +7,13 @@
                 <div class="panel panel-primary">
                         <div class="panel-heading">Contacts list</div>
                         <h1 class="h1">Hello <span th:text="${username}"></span></h1>
+						<div th:if="${username != 'stranger'}" class="panel-body">
+							<form th:action="@{/index}" method="get">
+								<label>Find by lastname</label>
+								<input type="text" name="keyword" th:value="${keyword}">
+								<button type="submit" class="btn btn-primary">Search</button>
+							</form>
+						</div>
                         <div class="panel-body">
                                 <table class="table">
                                         <tr>
@@ -60,7 +67,6 @@
                                                 <td>Tok'ra</td>
                                         </tr>
                                         <tr th:each="c:${listContacts}">
-                                                
                                                 <td th:text="${c.firstname}"></td>
                                                 <td th:text="${c.lastname}"></td>
                                                 <td th:text="${c.email}"></td>
