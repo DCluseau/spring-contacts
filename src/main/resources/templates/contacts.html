@@ -3,41 +3,80 @@
 <head>
 </head>
 <body>
-	<div layout:fragment="content">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Contacts list</div>
-			<h1 class="h1">Hello <span th:text="${username}"></span></h1>
-			<div class="panel-body">
-				<table class="table">
-					<tr>
-						<th>Id</th>
-						<th>Firstname</th>
-						<th>Lastname</th>
-						<th>Email</th>
-						<th>Phone number</th>
-						<th>Address</th>
-						<th>Category</th>
-						<th></th>
-						<th></th>
-					</tr>	
-					<tr th:each="c:${listContacts}">
-						<td th:text="${c.id}"></td>
-						<td th:text="${c.firstname}"></td>
-						<td th:text="${c.lastname}"></td>
-						<td th:text="${c.email}"></td>
-						<td th:text="${c.phoneNumber}"></td>
-						<td th:text="${c.address}"></td>
-						<td th:text="${c.category}"></td>
-						<td>
-							<a th:href="@{/edit(id=${c.id})}" class="btn btn-primary">Edit</a>
-						</td>
-						<td>
-							<a th:href="@{/delete(id=${c.id})}" class="btn btn-danger">Delete</a>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
+        <div layout:fragment="content">
+                <div class="panel panel-primary">
+                        <div class="panel-heading">Contacts list</div>
+                        <h1 class="h1">Hello <span th:text="${username}"></span></h1>
+                        <div class="panel-body">
+                                <table class="table">
+                                        <tr>
+                                                <th>Firstname</th>
+                                                <th>Lastname</th>
+                                                <th>Email</th>
+                                                <th>Phone number</th>
+                                                <th>Address</th>
+                                                <th>Category</th>
+                                                <th></th>
+                                                <th></th>
+                                        </tr>   
+                                        <tr th:if="${username.equals('stranger')}">
+                                                <td>Apophis</td>
+                                                <td>Goa'uld</td>
+                                                <td>apophis@badguys.ga</td>
+                                                <td>0566256842</td>
+                                                <td>Abydos</td>
+                                                <td>Goa'uld</td>
+                                        </tr>
+                                        <tr th:if="${username.equals('stranger')}">
+                                                <td>Ba'al</td>
+                                                <td>Goa'uld</td>
+                                                <td>baal@badguys.ga</td>
+                                                <td>0566526842</td>
+                                                <td>N/A</td>
+                                                <td>Goa'uld</td>
+                                        </tr>
+                                        <tr th:if="${username.equals('stranger')}">
+                                                <td>Narim</td>
+                                                <td>Tollan</td>
+                                                <td>narim@tollana.ga</td>
+                                                <td>0566256821</td>
+                                                <td>Tollana</td>
+                                                <td>Tollan</td>
+                                        </tr>
+                                        <tr th:if="${username.equals('stranger')}">
+                                                <td>Jacob</td>
+                                                <td>Carter</td>
+                                                <td>j.carter@tokra.ga</td>
+                                                <td>0566256866</td>
+                                                <td>Alpha Site</td>
+                                                <td>Tok'ra</td>
+                                        </tr>
+                                        <tr th:if="${username.equals('stranger')}">
+                                                <td>Martouf</td>
+                                                <td>Lantash</td>
+                                                <td>martouf.lantash@tokra.ga</td>
+                                                <td>0567256842</td>
+                                                <td>[REDACTED]</td>
+                                                <td>Tok'ra</td>
+                                        </tr>
+                                        <tr th:each="c:${listContacts}">
+                                                
+                                                <td th:text="${c.firstname}"></td>
+                                                <td th:text="${c.lastname}"></td>
+                                                <td th:text="${c.email}"></td>
+                                                <td th:text="${c.phoneNumber}"></td>
+                                                <td th:text="${c.address}"></td>
+                                                <td th:text="${c.category}"></td>
+                                                <td>
+                                                        <a th:href="@{/edit(id=${c.id})}" class="btn btn-primary">Edit</a>
+                                                </td>
+                                                <td>
+                                                        <a th:href="@{/delete(id=${c.id})}" class="btn btn-danger">Delete</a>
+                                                </td>
+                                        </tr>
+                                </table>
+                        </div>
+                </div>
+        </div>
 </body>
 </html>
