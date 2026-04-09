@@ -43,8 +43,6 @@ public class ContactController {
 			MyUser user = userRepository.findByUsername(currentPrincipalName).get();
 			List<Category> categories = categoryRepository.findAll();
 			if(kw != "") {
-//				contacts = contactRepository.findByUserAndLastnameContainsOrFirstnameContainsOrEmailContainsOrPhoneNumberContainsOrAddressContains(user, kw, kw, kw, kw, kw);
-//				contacts = contactRepository.findByWithUserAndLastnameContainsOrFirstnameContains(kw, kw, user);
 				contacts = contactRepository.findByUserAndLastnameContains(user, kw);
 			}else {
 				contacts = contactRepository.findByUser(user);
@@ -75,6 +73,9 @@ public class ContactController {
 		}
 		Category category = categoryRepository.findById(categoryId).get();
 		contact.setCategory(category);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		contact.setUser(userRepository.findByUsername(currentPrincipalName).get());
 		contactRepository.save(contact);
 		return "redirect:/index";
 	}
