@@ -15,7 +15,6 @@ id : Long
 username : String
 pwd : String
 email : String
-isConnected : boolean
 contacts : List&lt;Contact&gt;</panel_attributes>
     <additional_attributes/>
   </element>
@@ -60,7 +59,7 @@ name : String</panel_attributes>
       <w>160</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>m1=*
+    <panel_attributes>m1=1
 m2=*</panel_attributes>
     <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
   </element>
