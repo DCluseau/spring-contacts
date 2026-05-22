@@ -7,6 +7,7 @@ import fr.fms.dao.ContactRepository;
 import fr.fms.dao.MyUserRepository;
 import fr.fms.entities.Category;
 import fr.fms.entities.MyUser;
+import fr.fms.entities.Contact;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -17,6 +18,7 @@ import org.mockito.Mock;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,8 +59,8 @@ class ApplicationTests {
 	}
 
 	@Test
-	@DisplayName("userFindByName - Doit retourner le bon user")
-	public void userFindByName_shouldReturnContactList() {
+	@DisplayName("MyUserController - findByUsername : should return right user")
+	public void userFindByUsername_shouldReturnSearchedUser() {
 		// User list mocking
 		Optional<MyUser> mockUser = Optional.of(new MyUser("Carter", "", "", ""));
 
@@ -71,6 +73,21 @@ class ApplicationTests {
 
 		// Assertion
 		assertThat(result.get().getUsername()).isEqualTo("Carter");
+	}
+
+	@Test
+	@DisplayName("Contact - findByUser : should return right user")
+	public void contactFindByUser_shouldReturnSearchedUser() {
+		MyUser mockUser = new MyUser("Carter", "", "", "");
+		List<Contact> mockContactList = List.of(
+				new Contact("", "", mockUser, null),
+				new Contact("", "", mockUser, null),
+				new Contact("", "", mockUser, null));
+		when(contactRepository.findByUser(mockUser)).thenReturn(mockContactList);
+		List<Contact> result = contactRepository.findByUser(mockUser);
+
+		assertThat(result.get(0).getUser().getUsername()).isEqualTo("Carter");
+		assertThat(result.size()).isEqualTo(3);
 	}
 
 }
