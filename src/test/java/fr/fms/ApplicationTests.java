@@ -76,7 +76,7 @@ class ApplicationTests {
 	}
 
 	@Test
-	@DisplayName("Contact - findByUser : should return right user")
+	@DisplayName("Contact - findByUser : should return list of users")
 	public void contactFindByUser_shouldReturnSearchedUser() {
 		MyUser mockUser = new MyUser("Carter", "", "", "");
 		List<Contact> mockContactList = List.of(
@@ -90,4 +90,18 @@ class ApplicationTests {
 		assertThat(result.size()).isEqualTo(3);
 	}
 
+	@Test
+	@DisplayName("Contact - findByUserAndLastnameContains : should return List of users")
+	public void contactFindByUserAndLastnameContains_shouldReturnListOfUsers() {
+		MyUser mockUser = new MyUser("Carter", "", "", "");
+		List<Contact> mockContactList = List.of(
+				new Contact("", "", mockUser, null),
+				new Contact("", "", mockUser, null),
+				new Contact("", "", mockUser, null));
+		when(contactRepository.findByUserAndLastnameContains(mockUser, "Carter")).thenReturn(mockContactList);
+		List<Contact> result = contactRepository.findByUserAndLastnameContains(mockUser, "Carter");
+
+		assertThat(result.get(0).getUser().getUsername()).isEqualTo("Carter");
+		assertThat(result.size()).isEqualTo(3);
+	}
 }
